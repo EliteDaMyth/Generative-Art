@@ -45,7 +45,6 @@ function draw() {
   }
 }
 
-
 function keyTyped() {
   if (key === 's') {
     saveCanvas('FakeCodeImage', 'png');

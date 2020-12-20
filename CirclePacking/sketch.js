@@ -46,6 +46,12 @@ function draw() {
   }
 }
 
+function keyTyped() {
+  if (key === 's') {
+    saveCanvas('CirclePacking', 'png');
+  }
+}
+
 let range = (size, start = 1) => [...Array(size).keys()].map(i => i + start);
 let randomElement = (arr) => arr[int(random(arr.length))];
 let randomColor = () => [random(10, 200), random(10, 200), random(10, 200)];
