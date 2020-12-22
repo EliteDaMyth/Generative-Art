@@ -1,11 +1,11 @@
 // The width and height of our canvas. You can change these for experimentation!
-let width = 1000;
-let height = 1000;
+let W = 1000;
+let H = 1000;
 
 // The startCode variable contains the value of the y axis of the first line of "code" we will draw.
-let startCode = height / 20;
+let startCode = H / 20;
 // The endCode variable contains the value of the y axis of the last line of "code" we will draw.
-let endCode = height - startCode;
+let endCode = H - startCode;
 
 // noOfLines contains the value for the number of lines of "code".
 let noOfLines = 30;
@@ -23,7 +23,7 @@ let indent = 0;
  */
 function setup() {
   // Lets create a canvas with our width and height.
-  createCanvas(width, height);
+  createCanvas(W, H);
   // Setting the color mode to RGB. Not necessary, but working with RGB is easier imo.
   colorMode(RGB);
   // Set background color to black-ish type of color, but not pitch black.

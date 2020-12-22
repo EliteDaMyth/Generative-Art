@@ -2,25 +2,31 @@ let img;
 let num_triangles = 5000;
 
 function preload() {
-  img = loadImage("https://upload.wikimedia.org/wikipedia/commons/6/6a/Mona_Lisa.jpg");
+  img = loadImage("./parrot.jpg");
 }
 
 function setup() {
-  img.resize(img.width / 2.5, img.height / 2.5)
+  input = createFileInput(handleFile);
+  input.position(0, 0);
+  img.resize(img.width / 2, img.height / 2)
   createCanvas(img.width, img.height);
 
-  //noLoop()
+  noLoop()
 }
 
 function draw() {
+
   background(255);
   pixelDensity(1)
+
   img.loadPixels();
   loadPixels()
+
   var points = []
   for (var i = 0; i < num_triangles; i++) {
     points.push([Math.random() * img.width, Math.random() * img.height])
   }
+
   points.push([0, 0])
   points.push([0, img.height])
   points.push([img.width, img.height])
@@ -29,8 +35,11 @@ function draw() {
   const delaunay = Delaunator.from(points);
 
   let triangle_points = [];
+
   for (let triangle_id = 0; triangle_id < delaunay.triangles.length / 3; triangle_id++) {
+
     triangle_points = []
+
     for (var i = 0; i < 3; i++) {
       let halfedge_id = 3 * triangle_id + i;
       let point_id = delaunay.triangles[halfedge_id];
@@ -60,7 +69,18 @@ function draw() {
 
 function keyTyped() {
   if (key === 's') {
-    saveCanvas('AbstractTriangle', 'png');
+    saveCanvas('Delaunated', 'png');
   }
 }
 
+function handleFile(file) {
+  print(file);
+  if (file.type === 'image') {
+    loadImage(file.data, im => {
+      img = im;
+      img.resize(img.width / 2, img.height / 2)
+      resizeCanvas(img.width, img.height);
+      draw();
+    });
+  }
+}
